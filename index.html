@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna </title>
+</head>
+<body>
+    import tkinter as tk
+from tkinter import messagebox
+
+# Criando a janela
+janela = tk.Tk()
+janela.title("Urna Eletrônica")
+janela.geometry("400x550")
+
+
+# Título
+titulo = tk.Label(
+    janela,
+    text="URNA ELETRÔNICA",
+    font=("Arial", 22, "bold")
+)
+titulo.pack(pady=20)
+
+
+# Escolha do cargo
+tk.Label(
+    janela,
+    text="Escolha o cargo:",
+    font=("Arial", 12)
+).pack()
+
+cargo = tk.StringVar()
+cargo.set("Presidente")
+
+tk.Radiobutton(
+    janela,
+    text="Presidente",
+    variable=cargo,
+    value="Presidente"
+).pack()
+
+tk.Radiobutton(
+    janela,
+    text="Governador",
+    variable=cargo,
+    value="Governador"
+).pack()
+
+
+# Campo para mostrar o número
+tk.Label(
+    janela,
+    text="Número do candidato:",
+    font=("Arial", 12)
+).pack(pady=10)
+
+numero = tk.StringVar()
+
+entrada = tk.Entry(
+    janela,
+    textvariable=numero,
+    font=("Arial", 22),
+    justify="center"
+)
+
+entrada.pack()
+
+
+# Candidatos
+candidatos_presidente = {
+    "07": "Sabrina Carpenter",
+    "13": "Taylor Swift"
+}
+
+candidatos_governador = {
+    "07": "Sabrina Carpenter",
+    "13": "Taylor Swift"
+}
+
+
+# Função para colocar o número
+def adicionar(numero_botao):
+    numero.set(numero.get() + str(numero_botao))
+
+
+# Função para confirmar o voto
+def votar():
+
+    numero_candidato = numero.get()
+
+    if cargo.get() == "Presidente":
+
+        if numero_candidato in candidatos_presidente:
+
+            nome = candidatos_presidente[numero_candidato]
+
+            messagebox.showinfo(
+                "Voto confirmado",
+                "Você votou em: " + nome
+            )
+
+        else:
+
+            messagebox.showerror(
+                "Erro",
+                "Número de candidato inválido!"
+            )
+
+    else:
+
+        if numero_candidato in candidatos_governador:
+
+            nome = candidatos_governador[numero_candidato]
+
+            messagebox.showinfo(
+                "Voto confirmado",
+                "Você votou em: " + nome
+            )
+
+        else:
+
+            messagebox.showerror(
+                "Erro",
+                "Número de candidato inválido!"
+            )
+
+
+# Função para limpar
+def limpar():
+    numero.set("")
+
+
+# Teclado da urna
+botoes = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
+    ["0"]
+]
+
+
+for linha in botoes:
+
+    quadro = tk.Frame(janela)
+    quadro.pack()
+
+    for botao in linha:
+
+        tk.Button(
+            quadro,
+            text=botao,
+            width=8,
+            height=2,
+            font=("Arial", 12, "bold"),
+            command=lambda n=botao: adicionar(n)
+        ).pack(
+            side="left",
+            padx=3,
+            pady=3
+        )
+
+
+# Botão confirmar
+tk.Button(
+    janela,
+    text="CONFIRMAR VOTO",
+    width=25,
+    height=2,
+    font=("Arial", 12, "bold"),
+    command=votar
+).pack(pady=15)
+
+
+# Botão limpar
+tk.Button(
+    janela,
+    text="LIMPAR",
+    width=25,
+    height=2,
+    command=limpar
+).pack()
+
+
+# Mantém a janela aberta
+janela.mainloop()
+</body>
+</html>
