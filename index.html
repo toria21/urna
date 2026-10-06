@@ -3,187 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urna </title>
+    <title>Urna</title>
 </head>
 <body>
-    import tkinter as tk
-from tkinter import messagebox
+    ```html
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-# Criando a janela
-janela = tk.Tk()
-janela.title("Urna Eletrônica")
-janela.geometry("400x550")
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Urna</title>
 
-# Título
-titulo = tk.Label(
-    janela,
-    text="URNA ELETRÔNICA",
-    font=("Arial", 22, "bold")
-)
-titulo.pack(pady=20)
+    <style>
 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d9d9d9;
 
-# Escolha do cargo
-tk.Label(
-    janela,
-    text="Escolha o cargo:",
-    font=("Arial", 12)
-).pack()
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-cargo = tk.StringVar()
-cargo.set("Presidente")
+            min-height: 100vh;
+            margin: 0;
+        }
 
-tk.Radiobutton(
-    janela,
-    text="Presidente",
-    variable=cargo,
-    value="Presidente"
-).pack()
+        .urna {
+            width: 800px;
 
-tk.Radiobutton(
-    janela,
-    text="Governador",
-    variable=cargo,
-    value="Governador"
-).pack()
+            background-color: #555;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            display: flex;
+            gap: 25px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
 
 
-# Campo para mostrar o número
-tk.Label(
-    janela,
-    text="Número do candidato:",
-    font=("Arial", 12)
-).pack(pady=10)
+        
 
-numero = tk.StringVar()
-
-entrada = tk.Entry(
-    janela,
-    textvariable=numero,
-    font=("Arial", 22),
-    justify="center"
-)
-
-entrada.pack()
+        input {
+            display: none;
+        }
 
 
-# Candidatos
-candidatos_presidente = {
-    "07": "Sabrina Carpenter",
-    "13": "Taylor Swift"
-}
+        
 
-candidatos_governador = {
-    "07": "Sabrina Carpenter",
-    "13": "Taylor Swift"
-}
+        .tela {
+            width: 480px;
+            height: 400px;
 
+            background-color: #f2f2f2;
 
-# Função para colocar o número
-def adicionar(numero_botao):
-    numero.set(numero.get() + str(numero_botao))
+            border: 8px solid #222;
 
+            padding: 20px;
 
-# Função para confirmar o voto
-def votar():
+            box-sizing: border-box;
+        }
 
-    numero_candidato = numero.get()
+        .tela h2 {
+            text-align: center;
+            margin-top: 0;
+        }
 
-    if cargo.get() == "Presidente":
+        .numero-digitado {
+            font-size: 22px;
+            font-weight: bold;
 
-        if numero_candidato in candidatos_presidente:
-
-            nome = candidatos_presidente[numero_candidato]
-
-            messagebox.showinfo(
-                "Voto confirmado",
-                "Você votou em: " + nome
-            )
-
-        else:
-
-            messagebox.showerror(
-                "Erro",
-                "Número de candidato inválido!"
-            )
-
-    else:
-
-        if numero_candidato in candidatos_governador:
-
-            nome = candidatos_governador[numero_candidato]
-
-            messagebox.showinfo(
-                "Voto confirmado",
-                "Você votou em: " + nome
-            )
-
-        else:
-
-            messagebox.showerror(
-                "Erro",
-                "Número de candidato inválido!"
-            )
+            margin-top: 30px;
+        }
 
 
-# Função para limpar
-def limpar():
-    numero.set("")
+        
+
+        .resultado {
+            display: none;
+
+            margin-top: 30px;
+
+            border: 2px solid #333;
+
+            padding: 15px;
+
+            background-color: white;
+        }
+
+        .resultado h3 {
+            margin: 0 0 10px 0;
+        }
 
 
-# Teclado da urna
-botoes = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"],
-    ["0"]
-]
+        
+
+        #confirmar:checked ~ .urna .resultado13 {
+            display: none;
+        }
+
+        #confirmar:checked ~ .urna .resultado07 {
+            display: none;
+        }
 
 
-for linha in botoes:
+        /* TAYLOR */
 
-    quadro = tk.Frame(janela)
-    quadro.pack()
+        #voto13:checked ~ .urna .tela .numero13 {
+            display: block;
+        }
 
-    for botao in linha:
-
-        tk.Button(
-            quadro,
-            text=botao,
-            width=8,
-            height=2,
-            font=("Arial", 12, "bold"),
-            command=lambda n=botao: adicionar(n)
-        ).pack(
-            side="left",
-            padx=3,
-            pady=3
-        )
+        #voto13:checked ~ .urna .tela .numero07 {
+            display: none;
+        }
 
 
-# Botão confirmar
-tk.Button(
-    janela,
-    text="CONFIRMAR VOTO",
-    width=25,
-    height=2,
-    font=("Arial", 12, "bold"),
-    command=votar
-).pack(pady=15)
+        /* SABRINA */
+
+        #voto07:checked ~ .urna .tela .numero07 {
+            display: block;
+        }
+
+        #voto07:checked ~ .urna .tela .numero13 {
+            display: none;
+        }
 
 
-# Botão limpar
-tk.Button(
-    janela,
-    text="LIMPAR",
-    width=25,
-    height=2,
-    command=limpar
-).pack()
+        
+
+        #voto13:checked ~ #confirmar:checked ~ .urna .resultado13 {
+            display: block;
+        }
 
 
-# Mantém a janela aberta
-janela.mainloop()
+        
+
+        #voto07:checked ~ #confirmar:checked ~ .urna .resultado07 {
+            display: block;
+        }
+
+
+        
+
+        .numero13,
+        .numero07 {
+            display: none;
+        }
+
+
+        
+
+        .teclado {
+            width: 250px;
+        }
+
+        .teclado h2 {
+            color: white;
+
+            text-align: center;
+
+            margin-top: 0;
+        }
+
+        .numeros {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .numero-teclado {
+            height: 55px;
+
+            background-color: #111;
+
+            color: white;
+
+            border: none;
+
+            font-size: 20px;
+
+            border-radius: 5px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            cursor: pointer;
+        }
+
+        .numero-teclado:hover {
+            background-color: #333;
+        }
+
+
+        /* BOTÕES */
+
+        .acoes {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 15px;
+        }
+
+        .botao {
+            flex: 1;
+
+            padding: 12px 5px;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            border: none;
+
+            cursor: pointer;
+
+            text-align: center;
+        }
+
+        .branco {
+            background-color: white;
+
+            color: black;
+        }
+
+        .corrige {
+            background-color: #e5b800;
+
+            color: black;
+        }
+
+        .confirma {
+            background-color: #20a020;
+
+            color: white;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+
+
+    <input type="radio" name="voto" id="voto13">
+
+    <input type="radio" name="voto" id="voto07">
+
+    <input type="checkbox" id="confirmar">
+
+
+    <div class="urna">
+
+
+        
+
+        <div class="tela">
+
+            <h2>ELEIÇÃO</h2>
+
+            <p>Digite o número do candidato:</p>
+
+
+            <!-- NÚMERO 13 -->
+
+            <div class="numero-digitado numero13">
+                Número: 13
+            </div>
+
+
+            <!-- NÚMERO 07 -->
+
+            <div class="numero-digitado numero07">
+                Número: 07
+            </div>
+
+
+            
+
+            <div class="resultado resultado13">
+
+                <h3>Taylor Swift</h3>
+
+                <p>Presidente</p>
+
+                <p>
+                    Número: <strong>13</strong>
+                </p>
+
+            </div>
+
+
+            
+
+            <div class="resultado resultado07">
+
+                <h3>Sabrina Carpenter</h3>
+
+                <p>Governador</p>
+
+                <p>
+                    Número: <strong>07</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+    
+
+        <div class="teclado">
+
+            <h2>TECLADO</h2>
+
+
+            <div class="numeros">
+
+                <label for="voto13" class="numero-teclado">
+                    1
+                </label>
+
+                <label for="voto13" class="numero-teclado">
+                    2
+                </label>
+
+                <label for="voto13" class="numero-teclado">
+                    3
+                </label>
+
+
+                <label for="voto13" class="numero-teclado">
+                    4
+                </label>
+
+                <label for="voto13" class="numero-teclado">
+                    5
+                </label>
+
+                <label for="voto13" class="numero-teclado">
+                    6
+                </label>
+
+
+                <label for="voto07" class="numero-teclado">
+                    7
+                </label>
+
+                <label for="voto07" class="numero-teclado">
+                    8
+                </label>
+
+                <label for="voto07" class="numero-teclado">
+                    9
+                </label>
+
+
+                <div class="numero-teclado"></div>
+
+                <label for="voto07" class="numero-teclado">
+                    0
+                </label>
+
+                <div class="numero-teclado"></div>
+
+            </div>
+
+
+        
+
+            <div class="acoes">
+
+                <label class="botao branco">
+                    BRANCO
+                </label>
+
+
+                <label class="botao corrige"
+                       onclick="this.form.reset()">
+                    CORRIGE
+                </label>
+
+
+                <label for="confirmar" class="botao confirma">
+                    CONFIRMA
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```
+
 </body>
 </html>
