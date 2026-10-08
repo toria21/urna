@@ -1,416 +1,422 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urna</title>
-</head>
-<body>
-    ```html
-<!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Urna</title>
+    <title>Urna Eletrônica</title>
 
     <style>
-
         body {
             font-family: Arial, sans-serif;
-            background-color: #d9d9d9;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            min-height: 100vh;
+            background-color: #eeeeee;
             margin: 0;
+            padding: 20px;
         }
 
         .urna {
-            width: 800px;
-
-            background-color: #555;
-
-            padding: 30px;
-
-            border-radius: 15px;
-
-            display: flex;
-            gap: 25px;
-
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
-
-        
-
-        input {
-            display: none;
-        }
-
-
-        
-
-        .tela {
-            width: 480px;
-            height: 400px;
-
-            background-color: #f2f2f2;
-
-            border: 8px solid #222;
-
-            padding: 20px;
-
+            width: 900px;
+            max-width: 95%;
+            margin: auto;
+            background-color: white;
+            border: 3px solid #333;
+            padding: 25px;
             box-sizing: border-box;
         }
 
-        .tela h2 {
+        h1 {
             text-align: center;
             margin-top: 0;
         }
 
-        .numero-digitado {
-            font-size: 22px;
-            font-weight: bold;
-
-            margin-top: 30px;
-        }
-
-
-        
-
-        .resultado {
-            display: none;
-
-            margin-top: 30px;
-
-            border: 2px solid #333;
-
-            padding: 15px;
-
-            background-color: white;
-        }
-
-        .resultado h3 {
-            margin: 0 0 10px 0;
-        }
-
-
-        
-
-        #confirmar:checked ~ .urna .resultado13 {
-            display: none;
-        }
-
-        #confirmar:checked ~ .urna .resultado07 {
-            display: none;
-        }
-
-
-        /* TAYLOR */
-
-        #voto13:checked ~ .urna .tela .numero13 {
-            display: block;
-        }
-
-        #voto13:checked ~ .urna .tela .numero07 {
-            display: none;
-        }
-
-
-        /* SABRINA */
-
-        #voto07:checked ~ .urna .tela .numero07 {
-            display: block;
-        }
-
-        #voto07:checked ~ .urna .tela .numero13 {
-            display: none;
-        }
-
-
-        
-
-        #voto13:checked ~ #confirmar:checked ~ .urna .resultado13 {
-            display: block;
-        }
-
-
-        
-
-        #voto07:checked ~ #confirmar:checked ~ .urna .resultado07 {
-            display: block;
-        }
-
-
-        
-
-        .numero13,
-        .numero07 {
-            display: none;
-        }
-
-
-        
-
-        .teclado {
-            width: 250px;
-        }
-
-        .teclado h2 {
-            color: white;
-
+        .cargos {
             text-align: center;
-
-            margin-top: 0;
+            margin-bottom: 20px;
         }
 
-        .numeros {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 10px;
-        }
-
-
-        .numero-teclado {
-            height: 55px;
-
-            background-color: #111;
-
-            color: white;
-
+        .cargos button {
+            padding: 12px 25px;
+            margin: 5px;
             border: none;
-
-            font-size: 20px;
-
-            border-radius: 5px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
+            background-color: #4b0082;
+            color: white;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        .numero-teclado:hover {
-            background-color: #333;
+        .principal {
+            display: flex;
+            gap: 30px;
         }
 
+        .candidatos {
+            width: 50%;
+            border: 2px solid #333;
+            padding: 15px;
+            box-sizing: border-box;
+        }
 
-        /* BOTÕES */
+        .candidatos h2 {
+            margin-top: 0;
+        }
 
-        .acoes {
-            display: flex;
+        .candidato {
+            padding: 12px;
+            margin: 8px 0;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
 
+        .urna {
+            text-align: center;
+        }
+
+        .teclado-area {
+            width: 50%;
+            background-color: #ddd;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #numero {
+            width: 150px;
+            height: 50px;
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #nome {
+            height: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .teclado {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
+            max-width: 250px;
+            margin: auto;
+        }
 
+        .teclado button {
+            height: 55px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .botoes-final {
             margin-top: 15px;
         }
 
-        .botao {
-            flex: 1;
-
-            padding: 12px 5px;
-
-            border-radius: 5px;
-
-            font-weight: bold;
-
-            border: none;
-
-            cursor: pointer;
-
-            text-align: center;
-        }
-
-        .branco {
-            background-color: white;
-
-            color: black;
-        }
-
         .corrige {
-            background-color: #e5b800;
-
-            color: black;
+            background-color: #e5c400;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
         }
 
         .confirma {
-            background-color: #20a020;
-
+            background-color: #22963b;
             color: white;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
         }
 
+        #mensagem {
+            margin-top: 15px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
-
 <body>
 
+<div class="urna">
 
+    <h1>🗳️ URNA ELETRÔNICA</h1>
 
+    <div class="cargos">
+        <p><strong>Escolha o cargo:</strong></p>
 
-    <input type="radio" name="voto" id="voto13">
+        <button onclick="escolherCargo('Presidente')">
+            PRESIDENTE
+        </button>
 
-    <input type="radio" name="voto" id="voto07">
+        <button onclick="escolherCargo('Governador')">
+            GOVERNADOR
+        </button>
+    </div>
 
-    <input type="checkbox" id="confirmar">
-
-
-    <div class="urna">
-
+    <div class="principal">
 
         
+        <div class="candidatos">
 
-        <div class="tela">
+            <h2 id="tituloCargo">Presidente</h2>
 
-            <h2>ELEIÇÃO</h2>
-
-            <p>Digite o número do candidato:</p>
-
-
-            <!-- NÚMERO 13 -->
-
-            <div class="numero-digitado numero13">
-                Número: 13
-            </div>
-
-
-            <!-- NÚMERO 07 -->
-
-            <div class="numero-digitado numero07">
-                Número: 07
-            </div>
-
-
-            
-
-            <div class="resultado resultado13">
-
-                <h3>Taylor Swift</h3>
-
-                <p>Presidente</p>
-
-                <p>
-                    Número: <strong>13</strong>
-                </p>
-
-            </div>
-
-
-            
-
-            <div class="resultado resultado07">
-
-                <h3>Sabrina Carpenter</h3>
-
-                <p>Governador</p>
-
-                <p>
-                    Número: <strong>07</strong>
-                </p>
-
-            </div>
+            <div id="listaCandidatos"></div>
 
         </div>
 
 
     
+        <div class="teclado-area">
 
-        <div class="teclado">
+            <h2>Digite o número</h2>
 
-            <h2>TECLADO</h2>
+            <input
+                type="text"
+                id="numero"
+                maxlength="2"
+                readonly
+            >
 
-
-            <div class="numeros">
-
-                <label for="voto13" class="numero-teclado">
-                    1
-                </label>
-
-                <label for="voto13" class="numero-teclado">
-                    2
-                </label>
-
-                <label for="voto13" class="numero-teclado">
-                    3
-                </label>
+            <div id="nome"></div>
 
 
-                <label for="voto13" class="numero-teclado">
-                    4
-                </label>
+            
+            <div class="teclado">
 
-                <label for="voto13" class="numero-teclado">
-                    5
-                </label>
+                <button onclick="digitar('1')">1</button>
+                <button onclick="digitar('2')">2</button>
+                <button onclick="digitar('3')">3</button>
 
-                <label for="voto13" class="numero-teclado">
-                    6
-                </label>
+                <button onclick="digitar('4')">4</button>
+                <button onclick="digitar('5')">5</button>
+                <button onclick="digitar('6')">6</button>
 
+                <button onclick="digitar('7')">7</button>
+                <button onclick="digitar('8')">8</button>
+                <button onclick="digitar('9')">9</button>
 
-                <label for="voto07" class="numero-teclado">
-                    7
-                </label>
-
-                <label for="voto07" class="numero-teclado">
-                    8
-                </label>
-
-                <label for="voto07" class="numero-teclado">
-                    9
-                </label>
-
-
-                <div class="numero-teclado"></div>
-
-                <label for="voto07" class="numero-teclado">
-                    0
-                </label>
-
-                <div class="numero-teclado"></div>
+                <button onclick="digitar('0')">0</button>
 
             </div>
 
 
-        
+            
+            <div class="botoes-final">
 
-            <div class="acoes">
-
-                <label class="botao branco">
-                    BRANCO
-                </label>
-
-
-                <label class="botao corrige"
-                       onclick="this.form.reset()">
+                <button
+                    class="corrige"
+                    onclick="corrigir()">
                     CORRIGE
-                </label>
+                </button>
 
-
-                <label for="confirmar" class="botao confirma">
+                <button
+                    class="confirma"
+                    onclick="confirmar()">
                     CONFIRMA
-                </label>
+                </button>
 
             </div>
+
+            <div id="mensagem"></div>
 
         </div>
 
     </div>
 
-</body>
+</div>
 
-</html>
-```
+
+<script>
+
+    
+
+    const candidatos = {
+
+        Presidente: {
+            "13": "Taylor Swift",
+            "05": "America Singer",
+            "34": "Adam Carlsen"
+        },
+
+        Governador: {
+            "69": "Sabrina Carpenter",
+            "07": "Elyan Kane",
+            "21": "Olive Smith"
+        }
+
+    };
+
+
+    
+    let cargoAtual = "Presidente";
+
+
+
+    function mostrarCandidatos() {
+
+        const lista =
+            document.getElementById("listaCandidatos");
+
+        lista.innerHTML = "";
+
+        for (
+            let numero in candidatos[cargoAtual]
+        ) {
+
+            const nome =
+                candidatos[cargoAtual][numero];
+
+            const candidato =
+                document.createElement("div");
+
+            candidato.className = "candidato";
+
+            candidato.innerHTML =
+                "<strong>" +
+                numero +
+                "</strong> - " +
+                nome;
+
+            lista.appendChild(candidato);
+        }
+
+        document.getElementById("tituloCargo")
+            .innerText = cargoAtual;
+    }
+
+    function escolherCargo(cargo) {
+
+        cargoAtual = cargo;
+
+        corrigir();
+
+        mostrarCandidatos();
+    }
+
+
+    function digitar(numero) {
+
+        const campo =
+            document.getElementById("numero");
+
+        if (campo.value.length < 2) {
+
+            campo.value += numero;
+
+            verificarCandidato();
+        }
+    }
+
+
+    
+
+    function verificarCandidato() {
+
+        const numero =
+            document.getElementById("numero").value;
+
+        const nome =
+            document.getElementById("nome");
+
+        if (
+            candidatos[cargoAtual][numero]
+        ) {
+
+            nome.innerText =
+                candidatos[cargoAtual][numero];
+
+        } else {
+
+            nome.innerText = "";
+        }
+    }
+
+
+    function corrigir() {
+
+        document.getElementById("numero")
+            .value = "";
+
+        document.getElementById("nome")
+            .innerText = "";
+
+        document.getElementById("mensagem")
+            .innerText = "";
+    }
+
+
+
+
+    function confirmar() {
+
+        const numero =
+            document.getElementById("numero").value;
+
+        const mensagem =
+            document.getElementById("mensagem");
+
+
+        if (numero === "") {
+
+            alert(
+                "Digite o número do candidato."
+            );
+
+            return;
+        }
+
+
+        if (
+            !candidatos[cargoAtual][numero]
+        ) {
+
+            alert(
+                "Número inválido!"
+            );
+
+            return;
+        }
+
+
+        const nome =
+            candidatos[cargoAtual][numero];
+
+
+        const confirmarVoto =
+            confirm(
+                "Cargo: " + cargoAtual +
+                "\nNúmero: " + numero +
+                "\nCandidato: " + nome +
+                "\n\nConfirmar voto?"
+            );
+
+
+        if (confirmarVoto) {
+
+            mensagem.innerText =
+                "✅ VOTO CONFIRMADO! " +
+                cargoAtual +
+                ": " +
+                nome;
+
+            alert(
+                "Voto confirmado!"
+            );
+
+            corrigir();
+        }
+    }
+
+
+    
+
+    mostrarCandidatos();
+
+</script>
 
 </body>
 </html>
